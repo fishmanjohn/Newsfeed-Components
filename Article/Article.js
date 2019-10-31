@@ -85,13 +85,29 @@ const data = [
     thirdParagraph: `Hodor hodor - hodor... Hodor hodor hodor hodor. Hodor. Hodor! Hodor hodor, hodor hodor hodor hodor hodor; hodor hodor? Hodor!
           Hodor hodor, HODOR hodor, hodor hodor?! Hodor! Hodor hodor, HODOR hodor, hodor hodor, hodor, hodor hodor. Hodor, hodor.
           Hodor. Hodor, hodor, hodor. Hodor hodor... Hodor hodor hodor?! Hodor, hodor... Hodor hodor HODOR hodor, hodor hodor. Hodor.`
+  },
+  {
+    title: 'Samuel L. Ipsum',
+    date:'Oct 30 2019',
+    firstParagraph:'The path of the righteous man is beset on all sides by the iniquities of the selfish and the tyranny of evil men. Blessed is he who, in the name of charity and good will, shepherds the weak through the valley of darkness, for he is truly his brothers keeper and the finder of lost children. And I will strike down upon thee with great vengeance and furious anger those who would attempt to poison and destroy My brothers. And you will know My name is the Lord when I lay My vengeance upon thee.',
+    
+    secondParagraph: 'Now that there is the Tec-9, a crappy spray gun from South Miami. This gun is advertised as the most popular gun in American crime. Do you believe that shit? It actually says that in the little book that comes with it: the most popular gun in American crime. Like theyre actually proud of that shit.',
+
+    thirdParagraph: 'My moneys in that office, right? If she start giving me some bullshit about it aint there, and we got to go someplace else and get it, Im gonna shoot you in the head then and there. Then Im gonna shoot that bitch in the kneecaps, find out where my goddamn money is. She gonna tell me too. Hey, look at me when Im talking to you, motherfucker. You listen: we go in there, and that nigga Winston or anybody else is in there, you the first motherfucker to get shot. You understand?'
+  },
+  {
+    title: 'jigga ipsum',
+    date:'Oct 30 2019',
+    firstParagraph:'Allow me to reintroduce myself. I invented swag. Poppin bottles, puttin supermodels in the cab. Yo, Im makin short term goals, when the weather folds.',
+    secondParagraph:'Just put away the leathers and put ice on the gold. Chilly with enough bail money to free a big Willy. High stakes, I got more at stake than Philly. Lets stick up the world and split it 50/50. Photo shoot fresh, looking like wealth, bout to call the papparazzi on myself. Cant leave rap alone, the game needs me. Im outchere ballin I know you see my sneaks. Look Im on my grind cousin, aint got time for frontin, sensitive thugs yall all need hugs.',
+    thirdParagraph:'Get your fatigues on, all black everything: Black cards, black cars, all black everything. So we living life like a video, where the sun is always out and you never get old and the champagnes always cold and the musics always good and the pretty girls just happen to stop by in the hood.',
   }
 ];
 
 /* Step 1: Create a function that creates a component. You will want your component to look like the template below: 
   
   <div class="article">
-    <h2>{title of the article}</h2>
+    <h2>{title of the article}</h2>      
     <p class="date">{date of the article}</p>
 
     {three separate paragraph elements}
@@ -99,9 +115,11 @@ const data = [
     <span class='expandButton'></span>
   </div>
 
-  Hint: You will need to use createElement more than once here!
+  Hint: You will need to use createElement more than once here!*/
 
-  Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
+
+
+  /*Your function should take either an object as it's one argument, or 5 separate arguments mapping to each piece of the data object above.
 
   Step 2: Add an event listener to the expandButton span. This event listener should toggle the class 'article-open' on the 'article' div.
 
@@ -112,3 +130,45 @@ const data = [
   Step 5: Add a new article to the array. Make sure it is in the same format as the others. Refresh the page to see the new article.
 
 */
+const articles = document.querySelector('.articles');
+
+data.forEach(data =>{
+  articles.appendChild(createComponent(data.title, data.date, data.firstParagraph, data.secondParagraph, data.thirdParagraph))
+});
+
+function createComponent(title,date,firstParagraph,secondParagraph,thirdParagraph){
+
+const article = document.createElement('div');
+const artTitle = document.createElement('h2');
+const artDate = document.createElement('p');
+const firstP = document.createElement('p');
+const secondP = document.createElement('p');
+const thirdP = document.createElement('p');
+const expandButton = document.createElement('span');
+//structure
+article.appendChild(artTitle);
+article.appendChild(artDate);
+article.appendChild(firstP);
+article.appendChild(secondP);
+article.appendChild(thirdP);
+article.appendChild(expandButton);
+//class names.
+article.classList.add('article');
+artDate.classList.add('date');
+expandButton.classList.add('expandButton');
+//console.log(article)
+//text content
+artTitle.textContent = title;
+artDate.textContent = date;
+firstP.textContent = firstParagraph;
+secondP.textContent = secondParagraph;
+thirdP.textContent = thirdParagraph;
+expandButton.textContent = 'expand';
+//button 
+expandButton.addEventListener('click',() =>{
+  article.classList.toggle('article-open')
+})
+
+return article;
+
+}
